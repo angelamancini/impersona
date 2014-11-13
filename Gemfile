@@ -3,9 +3,6 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.2'
 
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
-
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 
@@ -32,14 +29,45 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-# Use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.1.2'
+group :development, :test do
+  gem 'rspec-rails', '>= 3.0.0'
+  gem 'guard-rspec', '>= 4.2.10'
+  gem 'spork-rails', '>= 4.0.0'
+  gem 'guard-spork', '>= 1.5.1'
+  gem 'growl'
+  gem 'childprocess', '0.5.3'
+  gem 'quiet_assets'
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'meta_request'
+  gem 'rubocop', require: false
+  gem 'guard-rubocop'
+end
 
-# Use unicorn as the app server
-# gem 'unicorn'
+group :test do
+  gem 'selenium-webdriver', '2.35.1'
+  gem 'capybara', '2.2.0'
+  gem 'database_cleaner'
+  gem 'factory_girl_rails', '4.2.1'
+  gem 'faker'
+  gem 'simplecov', require: false
+end
+gem 'figaro'
 
-# Use Capistrano for deployment
-# gem 'capistrano', group: :development
+# Use MySQL as the database for Active Record
+gem 'mysql2'
 
-# Use debugger
-# gem 'debugger', group: [:development, :test]
+# Auth
+gem 'omniauth'
+gem 'omniauth-github'
+gem 'attr_encrypted'
+
+# Styles & Forms
+gem 'bootstrap-sass', '~> 3.2.0'
+gem 'font-awesome-sass', '~> 4.2.0'
+gem 'cocoon'
+gem 'rails-timeago', '~> 2.0'
+
+# APIs
+gem 'octokit', '~> 3.0'
+gem 'right_api_client'
