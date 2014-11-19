@@ -1,0 +1,2 @@
+$('#get_input_form').hide();
+$('#my_inputs').html("<%= escape_javascript(render partial: 'inputs', locals: { origin: @origin, origin_name: @origin_name, select_options: @input_select_types }) %>");
