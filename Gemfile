@@ -3,6 +3,9 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.2'
 
+# Use sqlite3 as the database for Active Record
+gem 'sqlite3'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 
@@ -54,8 +57,8 @@ group :test do
 end
 gem 'figaro'
 
-# Use MySQL as the database for Active Record
-gem 'mysql2'
+# Better Rails Server
+gem 'thin'
 
 # Auth
 gem 'omniauth'
@@ -65,9 +68,6 @@ gem 'attr_encrypted'
 # Styles & Forms
 gem 'bootstrap-sass', '~> 3.2.0'
 gem 'font-awesome-sass', '~> 4.2.0'
-gem 'cocoon'
-gem 'rails-timeago', '~> 2.0'
 
 # APIs
-gem 'octokit', '~> 3.0'
 gem 'right_api_client'
