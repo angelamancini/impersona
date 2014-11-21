@@ -11,7 +11,6 @@ module Rightscale
     def get_inputs(array_id, account_id)
       input_hash = {}
       server_array = get_server_array(array_id, account_id)
-      array_name = server_array.name
       inputs = server_array.current_instances.index.first.inputs.index
       inputs.each do |input|
         split = input.value.split(':')
@@ -20,7 +19,7 @@ module Rightscale
         type = split.first
         input_hash[input.name] = [type, value]
       end
-      return array_name, input_hash
+      return server_array.name, input_hash
     end
 
     def update_inputs(array_id, account_id, inputs)
@@ -43,6 +42,7 @@ module Rightscale
     end
 
     def get_inputs(deployment_id, account_id)
+      input_hash = {}
       deployment = get_deployment(deployment_id, account_id)
       inputs = deployment.inputs.index
       inputs.each do |input|
@@ -55,7 +55,14 @@ module Rightscale
       return deployment.name, input_hash
     end
 
-    def update_inputs(deployment_id, account_id)
+    def update_inputs(deployment_id, account_id, inputs)
+      input_hash = {}
+      inputs.each do |input|
+        input_hash[input.first] = "#{input.last['type']}:#{input.last['value']}"
+      end
+      deployment = get_deployment(deployment_id, account_id)
+      deployment.inputs.multi_update(inputs: input_hash)
+      return deployment.name
     end
   end
 end
