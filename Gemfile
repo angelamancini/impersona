@@ -36,15 +36,11 @@ group :development, :test do
   gem 'rspec-rails', '>= 3.0.0'
   gem 'guard-rspec', '>= 4.2.10'
   gem 'spork-rails', '>= 4.0.0'
-  gem 'guard-spork', '>= 1.5.1'
-  gem 'growl'
   gem 'childprocess', '0.5.3'
   gem 'quiet_assets'
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'meta_request'
-  gem 'rubocop', require: false
-  gem 'guard-rubocop'
 end
 
 group :test do
