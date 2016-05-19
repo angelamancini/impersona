@@ -1,5 +1,16 @@
 module Rightscale
   require 'right_api_client'
+  class Credential
+
+    def new_cred(account_id, name, value, description)
+      client = RightApi::Client.new(email: ENV['rs_email'],
+      password: ENV['rs_password'],
+      account_id: account_id)
+      credential_hash = { name: name, value: value, description:  }
+      client.credentials.create(credential:credential_hash)
+    end
+  end
+
   class ServerArray
     def get_server_array(array_id, account_id)
       client = RightApi::Client.new(email: ENV['rs_email'],
@@ -22,7 +33,15 @@ module Rightscale
       return server_array.name, input_hash
     end
 
+    def account_credentials(account_id)
+      client = RightApi::Client.new(email: ENV['rs_email'],
+      password: ENV['rs_password'],
+      account_id: account_id)
+      credentials = client.credentials.index(:view =>'sensitive')
+    end
+
     def update_inputs(array_id, account_id, inputs)
+      credentials = account_credentials(account_id)
       input_hash = {}
       inputs.each do |input|
         input_hash[input.first] = "#{input.last['type']}:#{input.last['value']}"

@@ -4,11 +4,6 @@
   <%= form_tag(get_array_inputs_path, :method=>'get', class: 'form-horizontal') do %>
     <div class='form-group'>
       <h3>Origin</h3>
-      <a href="#" class="show_hide"><i class="fa fa-question-circle"></i> Help</a>
-      <div class="slidingDiv">
-        <a href="#" class="show_hide"><i class="fa fa-times"></i> Close</a><br />
-        <%= image_tag('server_array_info.png') %>
-      </div>
       <label for="origin_account_id" class="col-sm-3 control-label">Origin Account:</label>
       <div class="col-sm-3">
         <%= text_field_tag :origin_account_id, '', class: 'form-control' %>

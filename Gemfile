@@ -32,34 +32,8 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-group :development, :test do
-  gem 'rspec-rails', '>= 3.0.0'
-  gem 'guard-rspec', '>= 4.2.10'
-  gem 'spork-rails', '>= 4.0.0'
-  gem 'childprocess', '0.5.3'
-  gem 'quiet_assets'
-  gem 'better_errors'
-  gem 'binding_of_caller'
-  gem 'meta_request'
-end
 
-group :test do
-  gem 'selenium-webdriver', '2.35.1'
-  gem 'capybara', '2.2.0'
-  gem 'database_cleaner'
-  gem 'factory_girl_rails', '4.2.1'
-  gem 'faker'
-  gem 'simplecov', require: false
-end
 gem 'figaro'
-
-# Better Rails Server
-gem 'thin'
-
-# Auth
-gem 'omniauth'
-gem 'omniauth-github'
-gem 'attr_encrypted'
 
 # Styles & Forms
 gem 'bootstrap-sass', '~> 3.2.0'
