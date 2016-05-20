@@ -23,7 +23,7 @@ module Rightscale
         password: RIGHTSCALE_CONFIG['rs_password'],
         account_id: account_id,
         timeout: nil)
-      credential_hash = { name: name, value: value, description: description}
+      credential_hash = { name: name, value: value}
       client.credentials.create(credential:credential_hash)
     end
   end
@@ -60,13 +60,14 @@ module Rightscale
       credentials = Credential.account_credentials(account_id)
       input_hash = {}
       inputs.each do |input|
-        if input["type"] == 'cred'
-          if input["new_cred_name"] != ""
-            c = credentials.find { |c| c[:name] == input["value"] }
-            Credential.new_cred(account_id, input["new_cred_name"], c[:value], c[:description])
-          end
+        if input["type"] == 'cred' && input["new_cred_name"] != ""
+          c = credentials.find { |c| c[:name] == input["value"] }
+          Credential.new_cred(account_id, input["new_cred_name"], c[:value], c[:description])
+          input_name = input["new_cred_name"]
+        else
+          input_name = input["name"]
         end
-        input_hash[input["name"]] = "#{input["type"]}:#{input["value"]}"
+        input_hash[input_name] = "#{input["type"]}:#{input["value"]}"
       end
       server_array = get_server_array(array_id, account_id)
       server_array.next_instance.show.inputs
