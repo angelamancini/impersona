@@ -1,17 +1,18 @@
 <h3>Orig: <%= @origin_name %></h3>
 <%= form_tag(post_array_inputs_path, :method=>'post', class: 'form-horizontal') do %>
-  <% @origin.sort.each do |name, value| %>
+  <% @origin.each do |input| %>
     <div class='form-group'>
-      <label for="origin_array_id" class="col-sm-4 control-label"><%= name %>:</label>
+      <label for="origin_array_id" class="col-sm-4 control-label"><%= input[:name] %>:</label>
       <div class="col-sm-2">
-        <%= select_tag "input_data[#{name}][type]", options_for_select(@input_select_types, selected: value.first ), class: 'form-control' %>
+        <%= hidden_field_tag "input_data[][:name]", input[:name] %>
+        <%= select_tag "input_data[][:type]", options_for_select(@input_select_types, selected: input[:type] ), class: 'form-control' %>
       </div>
       <div class="col-sm-3">
-        <%= text_field_tag "input_data[#{name}][value]", value.last, class: 'form-control' %>
+        <%= text_field_tag "input_data[][:value]", input[:value], class: 'form-control' %>
       </div>
-      <% if value.first == 'cred' %>
+      <% if input[:type] == 'cred' %>
         <div class="col-sm-3">
-          <%= text_field_tag "input_data[#{name}][new_cred_name]", '',class: 'form-control', placeholder: 'new credential name'  %>
+          <%= text_field_tag "input_data[][:new_cred_name]", '',class: 'form-control', placeholder: 'new credential name'  %>
         </div>
       <% end %>
     </div>

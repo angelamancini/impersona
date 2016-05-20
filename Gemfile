@@ -32,7 +32,9 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-
+group :development do
+  gem 'pry'
+end
 gem 'figaro'
 
 # Styles & Forms
