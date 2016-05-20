@@ -24,10 +24,10 @@
       <%= text_field_tag "destination[account_id]", '', class: 'form-control' %>
     </div>
   </div>
-  <div class='form-group'>
-    <label for="dest_array_id" class="col-sm-3 control-label">Dest Array:</label>
-    <div class="col-sm-4">
-      <%= text_field_tag "destination[array_id]", '', class: 'form-control' %>
+  <div class="form-group">
+    <%= label_tag :dest_array_id, 'Destination Account', class: 'col-sm-3 control-label' %>
+    <div class='col-sm-4'>
+      <%= select_tag :dest_array_id, options_for_select(rs_accounts), { class: 'form-control account-id', prompt: 'Choose Account' } %>
     </div>
   </div>
   <div class="form-group">

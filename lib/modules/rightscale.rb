@@ -57,11 +57,10 @@ module Rightscale
       credentials = Credential.account_credentials(account_id)
       input_hash = {}
       inputs.each do |input|
-        binding.pry
         if input[:type] == 'cred'
           binding.pry
         end
-        input_hash[input.first] = "#{input.last['type']}:#{input.last['value']}"
+        input_hash[input.first] = "#{input[:type]}:#{input[:value]}"
       end
       server_array = get_server_array(array_id, account_id)
       server_array.next_instance.show.inputs
