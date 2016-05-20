@@ -9,10 +9,11 @@ class ServerArraysController < ApplicationController
   end
 
   def post_array_inputs
-    @destination = params[:destination]
+    @dest_account_id = params[:dest_account_id]
+    @dest_array_id = params[:dest_array_id]
     @inputs = params[:input_data]
-    
-    array_name = update_server_array_inputs(@destination, @inputs)
+
+    array_name = update_server_array_inputs(@dest_account_id, @dest_array_id, @inputs)
     flash[:notice] = "Inputs copied to #{array_name}"
     redirect_to server_arrays_path
   end

@@ -2,9 +2,10 @@ module Rightscale
   require 'right_api_client'
   class Credential
     def self.account_credentials(account_id)
-      client = RightApi::Client.new(email: ENV['rs_email'],
-      password: ENV['rs_password'],
-      account_id: account_id)
+      client = RightApi::Client.new(email: RIGHTSCALE_CONFIG['rs_email'],
+        password: RIGHTSCALE_CONFIG['rs_password'],
+        account_id: account_id,
+        timeout: nil)
       raw_credentials = client.credentials.index(:view =>'sensitive')
       credentials = []
       raw_credentials.each do |raw|
@@ -18,19 +19,21 @@ module Rightscale
     end
 
     def self.new_cred(account_id, name, value, description)
-      client = RightApi::Client.new(email: ENV['rs_email'],
-      password: ENV['rs_password'],
-      account_id: account_id)
-      credential_hash = { name: name, value: value, description: ''}
+      client = RightApi::Client.new(email: RIGHTSCALE_CONFIG['rs_email'],
+        password: RIGHTSCALE_CONFIG['rs_password'],
+        account_id: account_id,
+        timeout: nil)
+      credential_hash = { name: name, value: value, description: description}
       client.credentials.create(credential:credential_hash)
     end
   end
 
   class ServerArray
     def self.get_server_array(array_id, account_id)
-      client = RightApi::Client.new(email: ENV['rs_email'],
-                                    password: ENV['rs_password'],
-                                    account_id: account_id)
+      client = RightApi::Client.new(email: RIGHTSCALE_CONFIG['rs_email'],
+        password: RIGHTSCALE_CONFIG['rs_password'],
+        account_id: account_id,
+        timeout: nil)
       client.server_arrays(id: array_id).show
     end
 
@@ -57,10 +60,13 @@ module Rightscale
       credentials = Credential.account_credentials(account_id)
       input_hash = {}
       inputs.each do |input|
-        if input[:type] == 'cred'
-          binding.pry
+        if input["type"] == 'cred'
+          if input["new_cred_name"] != ""
+            c = credentials.find { |c| c[:name] == input["value"] }
+            Credential.new_cred(account_id, input["new_cred_name"], c[:value], c[:description])
+          end
         end
-        input_hash[input.first] = "#{input[:type]}:#{input[:value]}"
+        input_hash[input["name"]] = "#{input["type"]}:#{input["value"]}"
       end
       server_array = get_server_array(array_id, account_id)
       server_array.next_instance.show.inputs

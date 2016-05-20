@@ -11,10 +11,10 @@ module ServerArraysHelper
   end
 
   def server_array_inputs(array_id, account_id)
-    ServerArray.get_inputs(array_id, account_id)
+    Rightscale::ServerArray.get_inputs(array_id, account_id)
   end
 
-  def update_server_array_inputs(destination, inputs)
-    ServerArray.update_inputs(destination[:array_id], destination[:account_id], inputs)
+  def update_server_array_inputs(account_id, array_id, inputs)
+    Rightscale::ServerArray.update_inputs(array_id, account_id, inputs)
   end
 end
