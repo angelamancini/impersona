@@ -39,7 +39,6 @@ gem 'figaro'
 
 # Styles & Forms
 gem 'bootstrap-sass', '~> 3.2.0'
-gem 'font-awesome-sass', '~> 4.2.0'
 
 # APIs
 gem 'right_api_client'
